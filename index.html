@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathMart</title>
+
+
+<style>
+
+    *{
+        box-sizing: border-box;
+    }
+
+body{
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+form{
+
+    height: 500px;
+    width: 400px;
+    border: 2px solid white;
+    padding: 2px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 8%;
+    box-shadow: 2px 8px 20px 15px rgb(58, 175, 248);
+
+}
+h1{
+    color: white;
+
+}
+
+form .result{
+    margin-top: 3%;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+}
+
+form .ques{
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+form .mark{
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+form .ans{
+    margin-top: 10%;
+    height: 35px;
+    width: 55%;
+    border-radius: 20px;
+    border: none;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+form .submit{
+
+    width: 130px;
+    height: 30px;
+    margin-top: 5%;
+    color: white;
+    background-color: rgb(106, 62, 240);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px 3px rgb(104, 117, 235);
+    font-size: 18px;
+}
+
+form #btn0{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 100%;
+}
+
+
+form .next{
+    width: 150px;
+    height: 30px;
+    color: white;
+    background-color: rgb(41, 240, 101);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 8px;
+    padding: 2px;
+    box-shadow: 1px 1px 5px 3px rgb(104, 235, 126);
+    font-size: 18px;
+}
+
+form .score{
+    width: 160px;
+    margin: 8px;
+    height: 30px;
+    color: white;
+    background-color: rgb(10, 143, 232);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px 3px rgb(104, 226, 235); 
+    font-size: 18px;
+}
+
+
+
+
+
+</style>
+
+
+
+</head>
+
+<body>
+    
+    <form class="Quiz">
+        <h1>  <u>MathMart</u> </h1>
+        <span class="result">Solve It</span> <br> <br>
+        <div>
+            <span class="ques">10+10</span>
+            <span class="mark">= ?</span>
+        </div>
+       
+
+        <input type="number" class="ans" placeholder="0" required>
+        <input type="submit" class="submit">
+        
+        <div id="btn0">
+        <button class="next" type="button">Play Next</button>
+        <button class="score" disabled>Score</button>
+        </div>
+
+    
+
+
+    </form>
+
+    <script>
+      let Quiz = document.querySelector(".Quiz");
+      let result = document.querySelector(".result");
+      let ques = document.querySelector(".ques");
+      let ans = document.querySelector(".ans");
+      let submit = document.querySelector(".submit");
+      let next = document.querySelector(".next");
+      let score = document.querySelector(".score");
+
+
+      let prevscore = ~~localStorage.getItem('score');
+      score.textContent=`Score : ${prevscore}`;
+
+
+      function quest()
+      {
+        let op = ['+','-','*','/'];
+        let R1 = ~~(Math.random()*8)+20;
+        let R2 = ~~(Math.random()*10);
+        let Rop = ~~(Math.random()*4);
+
+        ques.textContent = `${R1} ${op[Rop]} ${R2}`;
+      }
+
+      quest();
+
+      next.style.display ="none";
+
+      Quiz.addEventListener('submit', (e) => {
+
+        e.preventDefault();
+        
+        submit.style.display ="none";
+        next.style.display ="block";
+
+        let cans = ~~Function('return ' + ques.textContent)().toFixed(1);
+
+        if(cans==ans.value){
+            result.textContent = "Wow This Is Correct Answer..."
+
+            let scr = prevscore+1;
+            
+            prevscore=scr;
+
+            localStorage.setItem("score", prevscore);
+            score.textContent = `Score : ${prevscore} `;
+        }
+
+        else{
+            result.textContent = `Oops ! Correct ans is ${cans}`;
+            let scr = prevscore-1;
+            
+            prevscore=scr;
+
+            localStorage.setItem("score", prevscore);
+            score.textContent = `Score : ${prevscore} `;
+        }
+
+      })
+
+      next.addEventListener('click', () =>{
+        quest();
+        result.textContent ="Solve It"
+        Quiz.reset();
+        next.style.display ="none"
+        submit.style.display ="block"
+
+      })
+
+
+
+
+    </script>
+
+</body>
+</html>
