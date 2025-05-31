@@ -1,231 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathMart</title>
-
-
-<style>
-
-    *{
-        box-sizing: border-box;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MathMart</title>
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-body{
-    background-color: cadetblue;
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1.5s ease;
+    }
 
-form{
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-    height: 500px;
-    width: 400px;
-    border: 2px solid white;
-    padding: 2px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 8%;
-    box-shadow: 2px 8px 20px 15px rgb(58, 175, 248);
+    form.Quiz {
+      width: 90%;
+      max-width: 420px;
+      padding: 2rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      color: #fff;
+      animation: slideUp 0.8s ease;
+    }
 
-}
-h1{
-    color: white;
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-}
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-shadow: 1px 1px 5px #000;
+    }
 
-form .result{
-    margin-top: 3%;
-    font-size: 25px;
-    color: white;
-    font-weight: bold;
-}
+    .result {
+      margin: 1rem 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ffeb3b;
+      min-height: 1.5rem;
+      transition: all 0.3s ease;
+    }
 
-form .ques{
-    font-size: 40px;
-    color: white;
-    font-weight: bold;
-}
-form .mark{
-    font-size: 40px;
-    color: white;
-    font-weight: bold;
-}
+    .ques {
+      font-size: 2.3rem;
+      font-weight: bold;
+      color: #fff;
+    }
 
-form .ans{
-    margin-top: 10%;
-    height: 35px;
-    width: 55%;
-    border-radius: 20px;
-    border: none;
-    font-size: 30px;
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+    .mark {
+      font-size: 2.3rem;
+      color: #fff;
+    }
 
-form .submit{
+    .ans {
+      margin-top: 1.2rem;
+      padding: 12px;
+      width: 80%;
+      font-size: 1.6rem;
+      border-radius: 15px;
+      border: none;
+      text-align: center;
+      background: #fff;
+      color: #000;
+      transition: 0.3s ease;
+    }
 
-    width: 130px;
-    height: 30px;
-    margin-top: 5%;
-    color: white;
-    background-color: rgb(106, 62, 240);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 1px 1px 5px 3px rgb(104, 117, 235);
-    font-size: 18px;
-}
+    .ans:focus {
+      outline: none;
+      box-shadow: 0 0 10px #66faff;
+    }
 
-form #btn0{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    width: 100%;
-}
+    .submit, .next, .score {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
 
+    .submit {
+      background: linear-gradient(to right, #7f00ff, #e100ff);
+      box-shadow: 0 4px 15px rgba(224, 0, 255, 0.4);
+    }
 
-form .next{
-    width: 150px;
-    height: 30px;
-    color: white;
-    background-color: rgb(41, 240, 101);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 8px;
-    padding: 2px;
-    box-shadow: 1px 1px 5px 3px rgb(104, 235, 126);
-    font-size: 18px;
-}
+    .next {
+      background: linear-gradient(to right, #00b09b, #96c93d);
+      box-shadow: 0 4px 15px rgba(0, 176, 155, 0.4);
+      display: none;
+    }
 
-form .score{
-    width: 160px;
-    margin: 8px;
-    height: 30px;
-    color: white;
-    background-color: rgb(10, 143, 232);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 1px 1px 5px 3px rgb(104, 226, 235); 
-    font-size: 18px;
-}
+    .score {
+      background: linear-gradient(to right, #2196f3, #21cbf3);
+      box-shadow: 0 4px 15px rgba(33, 203, 243, 0.4);
+      margin-left: 10px;
+    }
 
+    .submit:hover, .next:hover, .score:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
 
+    #btn0 {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
 
-
-
-</style>
-
-
-
+    @media (max-width: 500px) {
+      .ques, .mark {
+        font-size: 2rem;
+      }
+      .ans {
+        font-size: 1.4rem;
+      }
+      .submit, .next, .score {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    
-    <form class="Quiz">
-        <h1>  <u>MathMart</u> </h1>
-        <span class="result">Solve It</span> <br> <br>
-        <div>
-            <span class="ques">10+10</span>
-            <span class="mark">= ?</span>
-        </div>
-       
+  <form class="Quiz">
+    <h1><u>MathMart</u></h1>
+    <span class="result">Solve It</span>
+    <div>
+      <span class="ques">10 + 10</span>
+      <span class="mark">= ?</span>
+    </div>
 
-        <input type="number" class="ans" placeholder="0" required>
-        <input type="submit" class="submit">
-        
-        <div id="btn0">
-        <button class="next" type="button">Play Next</button>
-        <button class="score" disabled>Score</button>
-        </div>
+    <input type="number" class="ans" placeholder="Your Answer" required />
+    <input type="submit" class="submit" value="Submit" />
 
-    
+    <div id="btn0">
+      <button class="next" type="button">Next</button>
+      <button class="score" disabled>Score</button>
+    </div>
+  </form>
 
+  <script>
+    const Quiz = document.querySelector(".Quiz");
+    const result = document.querySelector(".result");
+    const ques = document.querySelector(".ques");
+    const ans = document.querySelector(".ans");
+    const submit = document.querySelector(".submit");
+    const next = document.querySelector(".next");
+    const score = document.querySelector(".score");
 
-    </form>
+    let prevscore = parseInt(localStorage.getItem("score")) || 0;
+    score.textContent = `Score : ${prevscore}`;
 
-    <script>
-      let Quiz = document.querySelector(".Quiz");
-      let result = document.querySelector(".result");
-      let ques = document.querySelector(".ques");
-      let ans = document.querySelector(".ans");
-      let submit = document.querySelector(".submit");
-      let next = document.querySelector(".next");
-      let score = document.querySelector(".score");
+    function generateQuestion() {
+      const ops = ["+", "-", "*", "/"];
+      const n1 = Math.floor(Math.random() * 10) + 10;
+      const n2 = Math.floor(Math.random() * 9) + 1;
+      const op = ops[Math.floor(Math.random() * ops.length)];
+      ques.textContent = `${n1} ${op} ${n2}`;
+    }
 
+    generateQuestion();
 
-      let prevscore = ~~localStorage.getItem('score');
-      score.textContent=`Score : ${prevscore}`;
+    Quiz.addEventListener("submit", (e) => {
+      e.preventDefault();
 
+      const correctAns = parseFloat(Function("return " + ques.textContent)().toFixed(1));
+      const userAns = parseFloat(ans.value);
 
-      function quest()
-      {
-        let op = ['+','-','*','/'];
-        let R1 = ~~(Math.random()*8)+20;
-        let R2 = ~~(Math.random()*10);
-        let Rop = ~~(Math.random()*4);
-
-        ques.textContent = `${R1} ${op[Rop]} ${R2}`;
+      if (userAns === correctAns) {
+        result.innerHTML = `✅ <span style="color:lightgreen;">Correct!</span>`;
+        prevscore++;
+      } else {
+        result.innerHTML = `❌ Correct: <span style="color:#ff5252;">${correctAns}</span>`;
+        prevscore--;
       }
 
-      quest();
+      localStorage.setItem("score", prevscore);
+      score.textContent = `Score : ${prevscore}`;
+      submit.style.display = "none";
+      next.style.display = "inline-block";
+    });
 
-      next.style.display ="none";
-
-      Quiz.addEventListener('submit', (e) => {
-
-        e.preventDefault();
-        
-        submit.style.display ="none";
-        next.style.display ="block";
-
-        let cans = ~~Function('return ' + ques.textContent)().toFixed(1);
-
-        if(cans==ans.value){
-            result.textContent = "Wow This Is Correct Answer..."
-
-            let scr = prevscore+1;
-            
-            prevscore=scr;
-
-            localStorage.setItem("score", prevscore);
-            score.textContent = `Score : ${prevscore} `;
-        }
-
-        else{
-            result.textContent = `Oops ! Correct ans is ${cans}`;
-            let scr = prevscore-1;
-            
-            prevscore=scr;
-
-            localStorage.setItem("score", prevscore);
-            score.textContent = `Score : ${prevscore} `;
-        }
-
-      })
-
-      next.addEventListener('click', () =>{
-        quest();
-        result.textContent ="Solve It"
-        Quiz.reset();
-        next.style.display ="none"
-        submit.style.display ="block"
-
-      })
-
-
-
-
-    </script>
-
+    next.addEventListener("click", () => {
+      generateQuestion();
+      result.textContent = "Solve It";
+      Quiz.reset();
+      submit.style.display = "inline-block";
+      next.style.display = "none";
+    });
+  </script>
 </body>
 </html>
